@@ -9,6 +9,8 @@ def findAvailability(pincode,date):
         'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.76 Safari/537.36'}
 
     result = requests.get(URL, headers=header)
+    print(result.status_code)
+    print(type(result.status_code))
     if result.status_code==302:
         response_json = result.json()
         data = response_json["sessions"]
