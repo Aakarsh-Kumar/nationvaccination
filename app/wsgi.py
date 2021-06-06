@@ -1,7 +1,7 @@
 from flask import Flask, render_template ,request, redirect
 #from requests.api import request
 app = Flask(__name__,template_folder='templates')
-from templates.Cowin_Slots import *
+from Cowin_Slots import *
 
 @app.route('/')
 def index():
