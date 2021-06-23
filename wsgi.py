@@ -10,6 +10,7 @@ def findAvailability(pincode,date):
 
     result = requests.get(URL)
     response_json = result.json()
+    print(response_json)
     data = response_json["sessions"]
     return data
 
