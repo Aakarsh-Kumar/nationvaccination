@@ -9,12 +9,10 @@ def findAvailability(pincode,date):
         'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.76 Safari/537.36'}
 
     result = requests.get(URL, headers=header)
-    if result.status_code==200:
-        response_json = result.json()
-        data = response_json["sessions"]
-        return data
-    else:
-        return False
+    response_json = result.json()
+    data = response_json["sessions"]
+    return data
+
 app = Flask(__name__,template_folder='templates')
 
 global URL, header
@@ -32,10 +30,8 @@ def data():
             date=f"{date[0]}-{date[1]}-{date[2]}"
             
             data=findAvailability(request.form['pincode'],date)
-
-            if data==False:
-                return redirect("/")
-            elif len(data)==0:
+            
+            if len(data)==0:
                 return render_template('no-slots.html')
             else:
                 return render_template('data.html',data=data)
@@ -45,4 +41,4 @@ def data():
         return redirect("/")
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
